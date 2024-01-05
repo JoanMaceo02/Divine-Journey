@@ -1,1 +1,1 @@
-Este repositorio contiene todo el códidgo y assets del juego Divine Journey.
+Este repositorio contiene todo el código y assets del juego Divine Journey.
