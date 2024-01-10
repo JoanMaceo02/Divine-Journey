@@ -1,11 +1,7 @@
-[gd_scene format=3 uid="uid://cgqgg6t4ox8pe"]
+[gd_scene load_steps=2 format=3 uid="uid://cgqgg6t4ox8pe"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://be2yfq5ii3qsm" path="res://Scenes/player.tscn" id="1_dnvml"]
 
-[node name="Label" type="Label" parent="."]
-offset_left = 272.0
-offset_top = 208.0
-offset_right = 1152.0
-offset_bottom = 299.0
-theme_override_font_sizes/font_size = 64
-text = "MAIN SCENE"
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_dnvml")]

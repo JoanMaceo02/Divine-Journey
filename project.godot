@@ -24,3 +24,6 @@ window/stretch/mode="canvas_items"
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/stretch/mode="disabled"
+textures/size/window_height_override=0
+textures/size/window_width_override=0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://be2yfq5ii3qsm"]
+
+[ext_resource type="Texture2D" uid="uid://c220mq3lup200" path="res://Assets/Player/Player Front Idle/Player Front Idle.png" id="1_5h5u5"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(392, 552)
+texture = ExtResource("1_5h5u5")
+hframes = 4
