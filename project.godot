@@ -17,12 +17,11 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/window_width_override=1920
-window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/stretch/mode="disabled"
 textures/size/window_height_override=0
