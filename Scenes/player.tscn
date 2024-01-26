@@ -819,6 +819,7 @@ states/Idle/position = Vector2(342, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_k5vwl")
 states/Walk/position = Vector2(489, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fe2ia"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_adt8k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_sxfkp")]
+graph_offset = Vector2(-258.839, 0)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ttxdg")
@@ -827,8 +828,7 @@ script = ExtResource("1_ttxdg")
 texture_filter = 1
 position = Vector2(8, 16)
 sprite_frames = SubResource("SpriteFrames_ymumt")
-animation = &"left_idle"
-frame = 1
+animation = &"back_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fr4sk")

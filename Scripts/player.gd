@@ -11,7 +11,6 @@ func _physics_process(delta):
 	player_movement(delta)
 
 
-
 func get_input():
 	# -1 is left 1 is right
 	input.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -23,7 +22,6 @@ func get_input():
 
 func player_movement(delta):
 	input = get_input()
-	#play_animation(input)
 	
 	if input == Vector2.ZERO:
 		velocity = Vector2.ZERO
@@ -32,6 +30,7 @@ func player_movement(delta):
 	else:
 		velocity = input * speed
 		set_walking_value(true)
+		# We only update the blend position when walking
 		update_blend_position()
 		
 	move_and_slide()
