@@ -429,3 +429,5 @@ animation = &"left_basic_attack"
 shape = SubResource("RectangleShape2D_fr4sk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
