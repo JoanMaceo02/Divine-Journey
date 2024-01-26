@@ -5,12 +5,11 @@ var current_dir = "none"
 
 var input = Vector2.ZERO
 
-
-func _ready():
-	$Sprite2D.play("right_idle")
+@onready var animation_tree = $AnimationTree
 
 func _physics_process(delta):
 	player_movement(delta)
+
 
 
 func get_input():
@@ -24,42 +23,26 @@ func get_input():
 
 func player_movement(delta):
 	input = get_input()
-	play_animation(input)
+	#play_animation(input)
 	
 	if input == Vector2.ZERO:
 		velocity = Vector2.ZERO
+		set_walking_value(false)
 		
 	else:
 		velocity = input * speed
+		set_walking_value(true)
+		update_blend_position()
 		
 	move_and_slide()
 	
 
-func play_animation(movement):
-	var anim = $Sprite2D
-	if movement.x > 0:
-		current_dir = "right"
-		anim.play("right_walk")
-	elif movement.x < 0:
-		current_dir = "left"
-		anim.play("left_walk")
-	elif movement.y < 0:
-		current_dir = "up"
-		anim.play("back_walk")
-	elif movement.y > 0:
-		current_dir = "down"
-		anim.play("front_walk")
-	
-	# Match es como un switch
-	else:
-		match current_dir:
-			"right":
-				anim.play("right_idle")
-			"left":
-				anim.play("left_idle")
-			"up":
-				anim.play("back_idle")
-			"down":
-				anim.play("front_idle")
-	
 
+func set_walking_value(value):
+	animation_tree["parameters/conditions/is_walking"] = value
+	animation_tree["parameters/conditions/idle"] = not value
+
+
+func update_blend_position():
+	animation_tree["parameters/Idle/blend_position"] = input
+	animation_tree["parameters/Walk/blend_position"] = input
