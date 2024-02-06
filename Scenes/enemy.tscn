@@ -1,7 +1,8 @@
-[gd_scene load_steps=70 format=3 uid="uid://dunrh74sgdmov"]
+[gd_scene load_steps=74 format=3 uid="uid://dunrh74sgdmov"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_jwxxi"]
 [ext_resource type="Texture2D" uid="uid://dxixc4m4gxqja" path="res://Assets/Enemies/Goblin/Goblin Back Attack/Goblin Back Attack.png" id="1_uvd7k"]
+[ext_resource type="Shader" uid="uid://cc4k7chi5xd6g" path="res://Materials/hitFlash.tres" id="2_e13up"]
 [ext_resource type="Texture2D" uid="uid://s2cbv4acfdnt" path="res://Assets/Enemies/Goblin/Goblin Back Walk/Goblin Back Walk.png" id="2_y7fbb"]
 [ext_resource type="Texture2D" uid="uid://b6kodb4kwlmwg" path="res://Assets/Enemies/Goblin/Goblin Front Attack/Goblin Front Attack.png" id="3_df6ir"]
 [ext_resource type="Texture2D" uid="uid://b0htcmywqno66" path="res://Assets/Enemies/Goblin/Goblin Front Walk/Goblin Front Walk.png" id="4_ssn4j"]
@@ -11,6 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://bnlburxbgac6u" path="res://Assets/Enemies/Goblin/Goblin Right Walk/Goblin Right Walk.png" id="8_wyi28"]
 [ext_resource type="PackedScene" uid="uid://urjlda6abhkx" path="res://Scenes/hurt_box.tscn" id="10_syipm"]
 [ext_resource type="PackedScene" uid="uid://dimi8rqnsoraa" path="res://Scenes/hitbox.tscn" id="11_texhl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_by42a"]
+resource_local_to_scene = true
+shader = ExtResource("2_e13up")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yj1kn"]
 atlas = ExtResource("1_uvd7k")
@@ -578,13 +585,34 @@ size = Vector2(48, 88)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2fia"]
 size = Vector2(48, 88)
 
+[sub_resource type="Animation" id="Animation_qxn5n"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8s03"]
+_data = {
+"hit_flash": SubResource("Animation_qxn5n")
+}
+
 [node name="enemy" type="CharacterBody2D"]
 script = ExtResource("1_jwxxi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_by42a")
 sprite_frames = SubResource("SpriteFrames_an8he")
 animation = &"left_walk"
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -614,6 +642,11 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_k2fia")
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y8s03")
+}
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 
