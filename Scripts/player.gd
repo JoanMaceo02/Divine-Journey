@@ -2,8 +2,11 @@ extends CharacterBody2D
 
 @export var speed = 300
 var current_dir = "none"
+@export var health = 100
 
 var input = Vector2.ZERO
+@export var is_attacking = false
+var is_walking = false
 
 @onready var animation_tree = $AnimationTree
 
@@ -21,27 +24,46 @@ func get_input():
 
 
 func player_movement(delta):
+	# All the logic for the first basic attack (My idea is to have a basic combo attack for each weapon
+	if not is_attacking:
+		handle_first_basic_attack()
+	
 	input = get_input()
 	
 	if input == Vector2.ZERO:
 		velocity = Vector2.ZERO
-		set_walking_value(false)
+		is_walking = false
 		
 	else:
 		velocity = input * speed
-		set_walking_value(true)
-		# We only update the blend position when walking
-		update_blend_position()
+		is_walking = true
 		
-	move_and_slide()
+		# We only update the blend position when walking and not attacking
+		if not is_attacking:
+			update_blend_position()
 	
+	set_conditions_value()
+	move_and_slide()
 
 
-func set_walking_value(value):
-	animation_tree["parameters/conditions/is_walking"] = value
-	animation_tree["parameters/conditions/idle"] = not value
+# This function may be updated in teh future
+func handle_first_basic_attack():
+	is_attacking = Input.is_action_just_pressed("basic_attack")
 
+
+func set_conditions_value():
+	var value_walking = is_walking and not is_attacking
+	var value_idle = not is_walking and not is_attacking
+	animation_tree["parameters/conditions/is_walking"] = value_walking
+	animation_tree["parameters/conditions/idle"] = value_idle
+	animation_tree["parameters/conditions/is_attacking"] = is_attacking
 
 func update_blend_position():
 	animation_tree["parameters/Idle/blend_position"] = input
 	animation_tree["parameters/Walk/blend_position"] = input
+	animation_tree["parameters/Attack/blend_position"] = input
+
+
+func _on_hurt_box_area_entered(area):
+	health -= 50
+

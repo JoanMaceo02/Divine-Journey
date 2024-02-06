@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 100
 var direction = Vector2.ZERO
 var is_attacking = false
+@export var health = 100
 
 @onready var player = get_parent().get_node("Player")
 @onready var animation_tree = $AnimationTree
@@ -11,7 +12,6 @@ var is_attacking = false
 
 func _physics_process(delta):
 	move_enemy(delta)
-	print((player.position - position).length())
 
 
 func move_enemy(delta):
@@ -20,7 +20,7 @@ func move_enemy(delta):
 	direction = distance.normalized()
 	
 	# Valor provisional para que se detenga el enemigo, cambiar mas adelante
-	if (distance.length() < 70):
+	if (distance.length() < 100):
 		velocity = Vector2.ZERO
 		is_attacking = true
 	else:
@@ -45,3 +45,8 @@ func set_walking_value():
 
 func set_attacking_value():
 	animation_tree["parameters/conditions/is_attacking"] = is_attacking
+
+
+func _on_hurt_box_area_entered(area):
+	health -= 50
+	print(health)
