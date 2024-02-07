@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var speed = 100
 var direction = Vector2.ZERO
-var is_attacking = false
+@export var is_attacking = false
 @export var health = 200
 
 @onready var player = get_parent().get_node("Player")
@@ -21,17 +21,18 @@ func move_enemy(delta):
 	direction = distance.normalized()
 	
 	# Valor provisional para que se detenga el enemigo, cambiar mas adelante
-	if (distance.length() < 100):
-		velocity = Vector2.ZERO
-		is_attacking = true
-	else:
-		velocity = direction * speed
-		is_attacking = false
-	
+	if not is_attacking:
+		if (distance.length() < 100):
+			velocity = Vector2.ZERO
+			is_attacking = true
+		else:
+			velocity = direction * speed
+			
+		update_blend_position()
 	
 	set_attacking_value()
 	set_walking_value()
-	update_blend_position()
+	
 	move_and_slide()
 
 

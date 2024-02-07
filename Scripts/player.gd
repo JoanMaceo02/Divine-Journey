@@ -9,6 +9,7 @@ var input = Vector2.ZERO
 var is_walking = false
 
 @onready var animation_tree = $AnimationTree
+@onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -64,6 +65,12 @@ func update_blend_position():
 	animation_tree["parameters/Attack/blend_position"] = input
 
 
-func _on_hurt_box_area_entered(area):
+func take_damage():
 	health -= 50
+	print(health)
+	hit_flash_anim_player.play("hit_flash")
+
+
+func _on_hurt_box_area_entered(area):
+	take_damage()
 
