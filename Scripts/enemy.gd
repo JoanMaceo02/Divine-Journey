@@ -1,14 +1,18 @@
 extends CharacterBody2D
 
-
+# Stats
 @export var speed = 100
-var direction = Vector2.ZERO
-@export var is_attacking = false
-@export var health = 200
+@export var health = 210
+@export var damage = 60
 
+var is_attacking = false
+var direction = Vector2.ZERO
 @onready var player = get_parent().get_node("Player")
 @onready var animation_tree = $AnimationTree
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
+@onready var popupPosition = $PopupLocation
+
+signal take_damage_signal(damageRecieved)
 
 
 func _physics_process(delta):
@@ -50,8 +54,9 @@ func set_attacking_value():
 
 
 # Function to take damage
-func take_damage():
-	health -= 50
+func take_damage(damageRecivied):
+	take_damage_signal.emit(damageRecivied)
+	health -= damageRecivied
 	hit_flash_anim_player.play("hit_flash")
 	if health <= 0:
 		die()
@@ -62,4 +67,4 @@ func die():
 
 
 func _on_hurt_box_area_entered(area):
-	take_damage()
+	take_damage(player.damage)

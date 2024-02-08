@@ -1,15 +1,24 @@
 extends CharacterBody2D
 
-@export var speed = 300
-var current_dir = "none"
-@export var health = 100
 
+# Stats
+@export var speed = 300
+@export var health = 100
+@export var damage = 100
+
+var current_dir = "none"
 var input = Vector2.ZERO
-@export var is_attacking = false
+var is_attacking = false
 var is_walking = false
 
 @onready var animation_tree = $AnimationTree
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
+@onready var popupPosition = $PopupLocation
+
+#Signals
+signal take_damage_signal(damageRecieved)
+
+
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -65,12 +74,12 @@ func update_blend_position():
 	animation_tree["parameters/Attack/blend_position"] = input
 
 
-func take_damage():
-	health -= 50
-	print(health)
+func take_damage(damageRecivied):
+	take_damage_signal.emit(damageRecivied)
+	health -= damageRecivied
 	hit_flash_anim_player.play("hit_flash")
 
 
 func _on_hurt_box_area_entered(area):
-	take_damage()
-
+	take_damage(area.get_parent().get_parent().damage)
+	
