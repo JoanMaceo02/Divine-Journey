@@ -36,7 +36,6 @@ func get_input():
 
 func player_movement(delta):
 	# All the logic for the first basic attack (The idea is to have a basic combo attack for each weapon)
-	
 	attack_combo()
 	
 	input = get_input()
@@ -57,7 +56,7 @@ func player_movement(delta):
 	move_and_slide()
 
 
-# This function may be updated in teh future
+# This function may be updated in the future
 func attack_combo():
 	if Input.is_action_just_pressed("basic_attack"):
 		is_attacking = true
