@@ -12,6 +12,7 @@ var direction = Vector2.ZERO
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 @onready var popupPosition = $PopupLocation
 
+# Signals
 signal take_damage_signal(damageRecieved)
 
 

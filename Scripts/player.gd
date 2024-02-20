@@ -14,6 +14,7 @@ var is_walking = false
 @onready var animation_tree = $AnimationTree
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 @onready var popupPosition = $PopupLocation
+@onready var attackTimer = $AttackTimer
 
 #Signals
 signal take_damage_signal(damageRecieved)
@@ -34,9 +35,9 @@ func get_input():
 
 
 func player_movement(delta):
-	# All the logic for the first basic attack (My idea is to have a basic combo attack for each weapon
-	if not is_attacking:
-		handle_first_basic_attack()
+	# All the logic for the first basic attack (The idea is to have a basic combo attack for each weapon)
+	
+	attack_combo()
 	
 	input = get_input()
 	
@@ -57,15 +58,17 @@ func player_movement(delta):
 
 
 # This function may be updated in teh future
-func handle_first_basic_attack():
-	is_attacking = Input.is_action_just_pressed("basic_attack")
+func attack_combo():
+	if Input.is_action_just_pressed("basic_attack"):
+		is_attacking = true
 
 
 func set_conditions_value():
-	var value_walking = is_walking and not is_attacking
-	var value_idle = not is_walking and not is_attacking
+	var value_walking = is_walking 
+	var value_idle = not is_walking 
 	animation_tree["parameters/conditions/is_walking"] = value_walking
 	animation_tree["parameters/conditions/idle"] = value_idle
+	animation_tree["parameters/conditions/not_attacking"] = not is_attacking
 	animation_tree["parameters/conditions/is_attacking"] = is_attacking
 
 func update_blend_position():
