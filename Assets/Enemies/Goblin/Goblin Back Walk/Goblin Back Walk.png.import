@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cskqjcyjlimwl"
-path="res://.godot/imported/01073865290819.5d61d475f0072.jpg-e1bcf561ac72246ba37b5a248edb4e2d.ctex"
+uid="uid://s2cbv4acfdnt"
+path="res://.godot/imported/Goblin Back Walk.png-eef41c278c0aabb74665bb9592a2df37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/01073865290819.5d61d475f0072.jpg"
-dest_files=["res://.godot/imported/01073865290819.5d61d475f0072.jpg-e1bcf561ac72246ba37b5a248edb4e2d.ctex"]
+source_file="res://Assets/Enemies/Goblin/Goblin Back Walk/Goblin Back Walk.png"
+dest_files=["res://.godot/imported/Goblin Back Walk.png-eef41c278c0aabb74665bb9592a2df37.ctex"]
 
 [params]
 
