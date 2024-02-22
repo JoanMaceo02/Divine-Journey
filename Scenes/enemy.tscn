@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dunrh74sgdmov"]
+[gd_scene load_steps=76 format=3 uid="uid://dunrh74sgdmov"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_jwxxi"]
 [ext_resource type="Texture2D" uid="uid://dxixc4m4gxqja" path="res://Assets/Enemies/Goblin/Goblin Back Attack/Goblin Back Attack.png" id="1_uvd7k"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://urjlda6abhkx" path="res://Scenes/hurt_box.tscn" id="10_syipm"]
 [ext_resource type="PackedScene" uid="uid://dimi8rqnsoraa" path="res://Scenes/hitbox.tscn" id="11_texhl"]
 [ext_resource type="Script" path="res://Scripts/PopupLocation.gd" id="13_0v2vm"]
+[ext_resource type="PackedScene" uid="uid://ir27ihjv3h1h" path="res://Scenes/healthbar.tscn" id="14_mftij"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_by42a"]
 resource_local_to_scene = true
@@ -907,7 +908,7 @@ script = ExtResource("1_jwxxi")
 material = SubResource("ShaderMaterial_by42a")
 sprite_frames = SubResource("SpriteFrames_an8he")
 animation = &"left_walk"
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -947,6 +948,12 @@ shape = SubResource("CapsuleShape2D_8obxi")
 [node name="PopupLocation" type="Marker2D" parent="."]
 position = Vector2(0, -88)
 script = ExtResource("13_0v2vm")
+
+[node name="Healthbar" parent="." instance=ExtResource("14_mftij")]
+offset_left = -40.0
+offset_top = -64.0
+offset_right = 40.0
+offset_bottom = -56.0
 
 [connection signal="take_damage_signal" from="." to="PopupLocation" method="_on_enemy_take_damage_signal"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

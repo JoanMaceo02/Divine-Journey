@@ -4,7 +4,7 @@ extends CharacterBody2D
 # Stats
 @export var speed = 300
 @export var health = 100
-@export var damage = 100
+@export var damage = 20
 
 var current_dir = "none"
 var input = Vector2.ZERO
@@ -15,10 +15,14 @@ var is_walking = false
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 @onready var popupPosition = $PopupLocation
 @onready var attackTimer = $AttackTimer
+@onready var healthbar = $CanvasLayer/Healthbar
 
 #Signals
 signal take_damage_signal(damageRecieved)
 
+
+func _ready():
+	healthbar.init_health(health)
 
 
 func _physics_process(delta):
@@ -79,7 +83,17 @@ func update_blend_position():
 func take_damage(damageRecivied):
 	take_damage_signal.emit(damageRecivied)
 	health -= damageRecivied
+	healthbar.health = health
+	
 	hit_flash_anim_player.play("hit_flash")
+	if health <= 0:
+		die()
+
+
+func die():
+	# We go to main menu for the time being when we die
+	var menu_level = preload("res://Scenes/main_menu.tscn") as PackedScene
+	get_tree().change_scene_to_packed(menu_level)
 
 
 func _on_hurt_box_area_entered(area):

@@ -6,10 +6,10 @@ var secondsSecondDigit = 0
 var minutesFirstDigit = 0
 var minutesSecondsDigit = 0
 
-@onready var secondsLabelFirstDigit = $MarginContainer/VBoxContainer/HBoxContainer/Seconds1
-@onready var secondsLabelSecondDigit = $MarginContainer/VBoxContainer/HBoxContainer/Seconds2
-@onready var minutesLabelFirstDigit = $MarginContainer/VBoxContainer/HBoxContainer/Minutes1
-@onready var minutesLabelSecondsDigit = $MarginContainer/VBoxContainer/HBoxContainer/Minutes2
+@onready var secondsLabelFirstDigit = $GameTime/MarginContainer/VBoxContainer/HBoxContainer/Seconds1
+@onready var secondsLabelSecondDigit = $GameTime/MarginContainer/VBoxContainer/HBoxContainer/Seconds2
+@onready var minutesLabelFirstDigit = $GameTime/MarginContainer/VBoxContainer/HBoxContainer/Minutes1
+@onready var minutesLabelSecondsDigit = $GameTime/MarginContainer/VBoxContainer/HBoxContainer/Minutes2
 
 
 
