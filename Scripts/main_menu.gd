@@ -7,9 +7,9 @@ extends Node2D
 @onready var play_button = $MarginContainer/HBoxContainer/VBoxContainer/PlayButton as Button
 @onready var quit_button = $MarginContainer/HBoxContainer/VBoxContainer/QuitButton as Button
 
-# We do preload in order to stored teh scene in memory at the very beginning,
+# We do preload in order to stored teh scene in memory at the very bseginning,
 # This is helpful in order to avoid having delay when loading large scene
-@onready var start_level = preload("res://Scenes/mainScene.tscn") as PackedScene
+@onready var start_level = preload("res://Scenes/main_scene.tscn") as PackedScene
 
 
 # Called when the node enters the scene tree for the first time.
