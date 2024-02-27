@@ -22,6 +22,7 @@ signal take_damage_signal(damageRecieved)
 
 
 func _ready():
+	# We init the healthbar at the start of the scene
 	healthbar.init_health(health)
 
 
@@ -42,12 +43,14 @@ func player_movement(delta):
 	# All the logic for the first basic attack (The idea is to have a basic combo attack for each weapon)
 	attack_combo()
 	
+	# Get the input from the player
 	input = get_input()
 	
+	# if no input is provided the player stops
 	if input == Vector2.ZERO:
 		velocity = Vector2.ZERO
 		is_walking = false
-		
+	
 	else:
 		velocity = input * speed
 		is_walking = true
@@ -85,11 +88,12 @@ func take_damage(damageRecivied):
 	health -= damageRecivied
 	healthbar.health = health
 	
+	# Play the hit flash effect
 	hit_flash_anim_player.play("hit_flash")
 	if health <= 0:
 		die()
 
-
+# Function that manages the process when the player dies
 func die():
 	# We go to main menu for the time being when we die
 	var menu_level = load("res://Scenes/main_menu.tscn") as PackedScene

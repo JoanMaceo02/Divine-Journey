@@ -1,6 +1,8 @@
 extends Control
 
+# seconds variable tracks the complete seconds that have elapsed in total
 var seconds = 0
+# the next four variables are used to set the right text number for each digit of the clock
 var secondsFirstDigit = 0
 var secondsSecondDigit = 0
 var minutesFirstDigit = 0
@@ -12,10 +14,10 @@ var minutesSecondsDigit = 0
 @onready var minutesLabelSecondsDigit = $GameTime/MarginContainer/VBoxContainer/HBoxContainer/Minutes2
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	seconds += delta
+	# Operations to calculate what digit corresponds to each digit text
 	secondsFirstDigit = str(int(seconds) % 10)
 	secondsSecondDigit = str((int(seconds) / 10) % 6)
 	minutesFirstDigit = str((int(seconds) / 60) % 10)

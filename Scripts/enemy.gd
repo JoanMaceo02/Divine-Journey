@@ -8,7 +8,7 @@ extends CharacterBody2D
 var is_attacking = false
 var direction = Vector2.ZERO
 
-@onready var player = get_parent().get_node("Player")
+@onready var player = get_parent().get_node("Player") # Player variable
 @onready var animation_tree = $AnimationTree
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 @onready var popupPosition = $PopupLocation
@@ -19,6 +19,7 @@ signal take_damage_signal(damageRecieved)
 
 
 func _ready():
+	# We init the healthbar at the start of the scene
 	healthbar.init_health(health)
 
 
@@ -38,9 +39,11 @@ func move_enemy(delta):
 			is_attacking = true
 		else:
 			velocity = direction * speed
-			
+		
+		# We only update the blend positions if the player is not attacking
 		update_blend_position()
 	
+	# Setters of values for the animation tree
 	set_attacking_value()
 	set_walking_value()
 	
