@@ -92,7 +92,7 @@ func take_damage(damageRecivied):
 
 func die():
 	# We go to main menu for the time being when we die
-	var menu_level = preload("res://Scenes/main_menu.tscn") as PackedScene
+	var menu_level = load("res://Scenes/main_menu.tscn") as PackedScene
 	get_tree().change_scene_to_packed(menu_level)
 
 
