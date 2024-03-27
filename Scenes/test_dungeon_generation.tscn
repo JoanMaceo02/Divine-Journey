@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://boqpg0o721jw6"]
+
+[ext_resource type="PackedScene" uid="uid://y7p4w15dofc2" path="res://Scenes/dungeon_generation.tscn" id="1_btik2"]
+
+[sub_resource type="GDScript" id="GDScript_03e36"]
+script/source = "extends Node2D
+
+@onready var generate_button = $Generate
+
+
+func _ready():
+	generate_button.button_down.connect(_on_generate_pressed)
+
+
+
+func _on_generate_pressed():
+	var menu = load(\"res://Scenes/main_menu.tscn\")
+	get_tree().change_scene_to_packed(menu)
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_03e36")
+
+[node name="Dungeon" parent="." instance=ExtResource("1_btik2")]
+
+[node name="Generate" type="Button" parent="."]
+offset_left = -1272.0
+offset_top = -704.0
+offset_right = -1192.0
+offset_bottom = -673.0
+scale = Vector2(2.64, 3.08)
+text = "Generate"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(336, 152)
+zoom = Vector2(0.335, 0.335)
+
+[connection signal="pressed" from="Generate" to="." method="_on_generate_pressed"]

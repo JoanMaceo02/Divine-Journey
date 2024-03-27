@@ -9,7 +9,7 @@ extends Node2D
 
 # We do preload in order to stored teh scene in memory at the very beginning,
 # This is helpful in order to avoid having delay when loading large scene
-@onready var start_level = preload("res://Scenes/mainScene.tscn") as PackedScene
+@onready var start_level = preload("res://Scenes/test_dungeon_generation.tscn") as PackedScene
 
 
 # Called when the node enters the scene tree for the first time.
