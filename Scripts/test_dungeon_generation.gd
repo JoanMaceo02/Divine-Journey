@@ -1,11 +1,13 @@
 extends Node2D
 
+@onready var generate_button = $Generate
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass # Replace with function body.
+	generate_button.button_down.connect(_on_generate_pressed)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
+func _on_generate_pressed():
+	var menu = load("res://Scenes/main_menu.tscn")
+	get_tree().change_scene_to_packed(menu)
