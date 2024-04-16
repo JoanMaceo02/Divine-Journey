@@ -1,3 +1,4 @@
+class_name RoomBase
 extends Node2D
 
 

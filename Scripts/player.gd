@@ -25,7 +25,6 @@ func _ready():
 	# We init the healthbar at the start of the scene
 	healthbar.init_health(health)
 
-
 func _physics_process(delta):
 	player_movement(delta)
 
@@ -63,7 +62,7 @@ func player_movement(delta):
 	move_and_slide()
 
 
-# This function may be updated in the future
+# This function must be updated in the future
 func attack_combo():
 	if Input.is_action_just_pressed("basic_attack"):
 		is_attacking = true
@@ -83,6 +82,7 @@ func update_blend_position():
 	animation_tree["parameters/Attack/blend_position"] = input
 
 
+# This function controls the behaviour of the player when taking damage
 func take_damage(damageRecivied):
 	take_damage_signal.emit(damageRecivied)
 	health -= damageRecivied
@@ -100,6 +100,110 @@ func die():
 	get_tree().change_scene_to_packed(menu_level)
 
 
+# Used to detect if player is being damaged
 func _on_hurt_box_area_entered(area):
 	take_damage(area.get_parent().get_parent().damage)
+
+
+# Function to get the current visible scene
+func get_active_room(dungeon_node):
+	# Obtener todos los hijos del nodo
+	var rooms = dungeon_node.get_children()
+
+	# Filtrar los hijos visibles
+	for room in rooms:
+		if room.visible:
+			return room
+
+# Used to change scene when the player enters a door 
+func _on_detect_door_body_entered(body):
+	var parent_node = body.get_parent()
 	
+	"""print(parent_node.connected_rooms)
+	if body.is_in_group("DoorLeft"):
+		if parent_node.connected_rooms[Vector2(-1, 0)] != null:
+			var dungeon_node = get_parent().get_node("Dungeon")
+			# Disable the current room
+			disable_scene(get_active_room(dungeon_node))
+			# Add the next room
+			if not dungeon_node.has_node(parent_node.connected_rooms[Vector2(-1, 0)].get_path()):
+				dungeon_node.add_child(parent_node.connected_rooms[Vector2(-1, 0)])
+			else:
+				enable_scene(dungeon_node.get_node(parent_node.connected_rooms[Vector2(-1, 0)].get_path()))
+			# Change player position to middle
+			var current_room = get_active_room(dungeon_node)
+			position = current_room.get_node("PlayerSpawnPoint").position
+			print("Scene Changed Left")
+			
+	elif body.is_in_group("DoorRight"):
+		if parent_node.connected_rooms[Vector2(1, 0)] != null:
+			var dungeon_node = get_parent().get_node("Dungeon")
+			# Disable the current room
+			disable_scene(get_active_room(dungeon_node))
+			# Add the next room
+			if not dungeon_node.has_node(parent_node.connected_rooms[Vector2(1, 0)].get_path()):
+				dungeon_node.add_child(parent_node.connected_rooms[Vector2(1, 0)])
+			else:
+				enable_scene(dungeon_node.get_node(parent_node.connected_rooms[Vector2(1, 0)].get_path()))
+			# Change player position to middle
+			var current_room = get_active_room(dungeon_node)
+			position = current_room.get_node("PlayerSpawnPoint").position
+			print("Scene Changed Right")
+			
+	elif body.is_in_group("DoorUp"):
+		if parent_node.connected_rooms[Vector2(0, 1)] != null:
+			var dungeon_node = get_parent().get_node("Dungeon")
+			# Disable the current room
+			disable_scene(get_active_room(dungeon_node))
+			# Add the next room
+			if not dungeon_node.has_node(parent_node.connected_rooms[Vector2(0, 1)].get_path()):
+				dungeon_node.add_child(parent_node.connected_rooms[Vector2(0, 1)])
+			else:
+				enable_scene(dungeon_node.get_node(parent_node.connected_rooms[Vector2(0, 1)].get_path()))
+			# Change player position to middle
+			var current_room = get_active_room(dungeon_node)
+			position = current_room.get_node("PlayerSpawnPoint").position
+			print("Scene Changed Up")
+			
+	elif body.is_in_group("DoorDown"):
+		if parent_node.connected_rooms[Vector2(0, -1)] != null:
+			$DetectDoor.monitoring = false
+			var dungeon_node = get_parent().get_node("Dungeon")
+			# Disable the current room
+			disable_scene(get_active_room(dungeon_node))
+			# Add the next room
+			if not dungeon_node.has_node(parent_node.connected_rooms[Vector2(0, -1)].get_path()):
+				dungeon_node.add_child(parent_node.connected_rooms[Vector2(0, -1)])
+			else:
+				enable_scene(dungeon_node.get_node(parent_node.connected_rooms[Vector2(0, -1)].get_path()))
+			# Change player position to middle
+			var current_room = get_active_room(dungeon_node)
+			position = current_room.get_node("PlayerSpawnPoint").position
+			print("Scense Changed Down")
+			$DetectDoor.monitoring = true"""
+
+
+# Función auxiliuar recursiva para obtener el nodo raíz del cuerpo
+func get_root_node(node):
+	# Verificar si el nodo tiene un padre
+	if node.get_parent():
+		# Llamar recursivamente a la función con el padre del nodo
+		return get_root_node(node.get_parent())
+	else:
+		# Si el nodo no tiene un padre, es el nodo raíz
+		return node
+
+
+func disable_scene(scene):
+	scene.visible = false
+	scene.get_node("DoorLeft").tile_set.set_physics_layer_collision_layer(0, 0)
+	scene.get_node("DoorRight").tile_set.set_physics_layer_collision_layer(0, 0)
+	scene.get_node("DoorUp").tile_set.set_physics_layer_collision_layer(0, 0)
+	scene.get_node("DoorDown").tile_set.set_physics_layer_collision_layer(0, 0)
+
+func enable_scene(scene):
+	scene.visible = true
+	scene.get_node("DoorLeft").tile_set.set_physics_layer_collision_layer(0, 2**5)
+	scene.get_node("DoorRight").tile_set.set_physics_layer_collision_layer(0, 2**5)
+	scene.get_node("DoorUp").tile_set.set_physics_layer_collision_layer(0, 2**5)
+	scene.get_node("DoorDown").tile_set.set_physics_layer_collision_layer(0, 2**5)

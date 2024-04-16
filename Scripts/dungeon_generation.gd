@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var room = preload("res://Scenes/room.tscn")
+@onready var room = preload("res://Scenes/main_room.tscn")
 @onready var room_connection = preload("res://Scenes/connection.tscn")
 
 var min_number_rooms = 10
@@ -15,7 +15,8 @@ var isKeyRoomPlaced = false
 
 func _ready():
 	generate_dungeon(randi_range(-1000, 1000))
-	load_map()
+	add_child(dungeon[0])
+	#load_map()
 
 func generate_dungeon(dungeon_seed):
 	seed(dungeon_seed)

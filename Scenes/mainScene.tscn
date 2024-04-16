@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgqgg6t4ox8pe"]
 
 [ext_resource type="PackedScene" uid="uid://be2yfq5ii3qsm" path="res://Scenes/player.tscn" id="1_dnvml"]
-[ext_resource type="PackedScene" uid="uid://dunrh74sgdmov" path="res://Scenes/enemy.tscn" id="2_mrk6r"]
+[ext_resource type="PackedScene" uid="uid://y7p4w15dofc2" path="res://Scenes/dungeon_generation.tscn" id="2_q7ncn"]
 
 [node name="World" type="Node2D"]
 
@@ -9,7 +9,4 @@
 z_index = 1
 position = Vector2(584, 320)
 
-[node name="enemy" parent="." instance=ExtResource("2_mrk6r")]
-
-[node name="enemy2" parent="." instance=ExtResource("2_mrk6r")]
-position = Vector2(1160, 0)
+[node name="Dungeon" parent="." instance=ExtResource("2_q7ncn")]
