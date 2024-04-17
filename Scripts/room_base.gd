@@ -21,3 +21,11 @@ var connected_rooms = {
 
 func _process(delta):
 	type_Label.text = room_type
+
+
+func change_room_values(script_new_values):
+	room_type = script_new_values.room_type
+	is_room_placed = script_new_values.is_room_placed
+	is_room_checked = script_new_values.is_room_checked
+	room_connections = script_new_values.room_connections
+	connected_rooms = script_new_values.connected_rooms

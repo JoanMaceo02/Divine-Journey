@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/mainScene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+RoomInformationGlobal="*res://Scripts/room_information_global.gd"
+Player="*res://Scenes/player.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"

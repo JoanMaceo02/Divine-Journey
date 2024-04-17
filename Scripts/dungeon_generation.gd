@@ -1,7 +1,8 @@
 extends Node2D
 
 
-@onready var room = preload("res://Scenes/main_room.tscn")
+@onready var room_scene = preload("res://Scenes/main_room.tscn")
+@onready var room = preload("res://Scripts/main_room.gd")
 @onready var room_connection = preload("res://Scenes/connection.tscn")
 
 var min_number_rooms = 10
@@ -15,7 +16,7 @@ var isKeyRoomPlaced = false
 
 func _ready():
 	generate_dungeon(randi_range(-1000, 1000))
-	add_child(dungeon[0])
+	place_new_room(dungeon[0])
 	#load_map()
 
 func generate_dungeon(dungeon_seed):
@@ -23,7 +24,7 @@ func generate_dungeon(dungeon_seed):
 	var dungeon_size = randi_range(min_number_rooms, max_number_rooms)
 	
 	# Reference to the script attached to the scene
-	var main_room = room.instantiate()
+	var main_room = room.new()
 	main_room.room_type = "Main Room"
 	dungeon.append(main_room)
 	
@@ -108,7 +109,7 @@ func create_new_room(dungeon_size):
 		if keyRoomIndex != -1:
 			room_types.remove_at(keyRoomIndex)
 	
-	var new_room = room.instantiate()
+	var new_room = room.new()
 	
 	# Check to guarantee that there is a Boss Room and a Key Room
 	if dungeon_size == 2 and not isBossRoomPlaced and not isKeyRoomPlaced:
@@ -133,6 +134,13 @@ func create_new_room(dungeon_size):
 	
 	return new_room
 
+
+func place_new_room(script):
+	print(script.room_type)
+	var main_room_scene = room_scene.instantiate()
+	main_room_scene.change_room_values(script)
+	add_child(main_room_scene)
+	
 
 # Fucntion to show the map
 func load_map():

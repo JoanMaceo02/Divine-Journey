@@ -8,7 +8,6 @@ extends CharacterBody2D
 var is_attacking = false
 var direction = Vector2.ZERO
 
-@onready var player = get_parent().get_node("Player") # Player variable
 @onready var animation_tree = $AnimationTree
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 @onready var popupPosition = $PopupLocation
@@ -29,7 +28,7 @@ func _physics_process(delta):
 
 func move_enemy(delta):
 	# distance and direction of the enemy from the player
-	var distance = (player.position - position)
+	var distance = (Player.position - position)
 	direction = distance.normalized()
 	
 	# Valor provisional para que se detenga el enemigo, cambiar mas adelante
@@ -79,4 +78,4 @@ func die():
 
 
 func _on_hurt_box_area_entered(area):
-	take_damage(player.damage)
+	take_damage(Player.damage)

@@ -1285,7 +1285,7 @@ material = SubResource("ShaderMaterial_gk553")
 position = Vector2(8, 16)
 sprite_frames = SubResource("SpriteFrames_ymumt")
 animation = &"left_idle"
-frame = 2
+frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_horizontal_enabled = true
