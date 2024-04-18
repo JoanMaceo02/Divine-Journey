@@ -16,7 +16,8 @@ var isKeyRoomPlaced = false
 
 func _ready():
 	generate_dungeon(randi_range(-1000, 1000))
-	place_new_room(dungeon[0])
+	RoomInformationGlobal.script_current_room = dungeon[0]
+	get_tree().change_scene_to_packed(room_scene)
 	#load_map()
 
 func generate_dungeon(dungeon_seed):
@@ -134,13 +135,6 @@ func create_new_room(dungeon_size):
 	
 	return new_room
 
-
-func place_new_room(script):
-	print(script.room_type)
-	var main_room_scene = room_scene.instantiate()
-	main_room_scene.change_room_values(script)
-	add_child(main_room_scene)
-	
 
 # Fucntion to show the map
 func load_map():

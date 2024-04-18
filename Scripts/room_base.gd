@@ -29,3 +29,6 @@ func change_room_values(script_new_values):
 	is_room_checked = script_new_values.is_room_checked
 	room_connections = script_new_values.room_connections
 	connected_rooms = script_new_values.connected_rooms
+	PlayerVariables.player_spawn_position = get_node("PlayerSpawnPoint").position
+	var player_scene = load("res://Scenes/player.tscn")
+	add_child(player_scene.instantiate())

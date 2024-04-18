@@ -123,3 +123,8 @@ func _on_detect_door_body_entered(body):
 	elif body.get_name() == "DoorDown":
 		if parent_node.connected_rooms[Vector2(0, -1)] != null:
 			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, -1)])
+
+
+func _on_tree_entered():
+	if PlayerVariables.player_spawn_position != null:
+		position = PlayerVariables.player_spawn_position
