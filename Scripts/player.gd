@@ -25,7 +25,6 @@ func _ready():
 	# We init the healthbar at the start of the scene
 	healthbar.init_health(health)
 
-
 func _physics_process(delta):
 	player_movement(delta)
 
@@ -63,7 +62,7 @@ func player_movement(delta):
 	move_and_slide()
 
 
-# This function may be updated in the future
+# This function must be updated in the future
 func attack_combo():
 	if Input.is_action_just_pressed("basic_attack"):
 		is_attacking = true
@@ -83,6 +82,7 @@ func update_blend_position():
 	animation_tree["parameters/Attack/blend_position"] = input
 
 
+# This function controls the behaviour of the player when taking damage
 func take_damage(damageRecivied):
 	take_damage_signal.emit(damageRecivied)
 	health -= damageRecivied
@@ -100,6 +100,31 @@ func die():
 	get_tree().change_scene_to_packed(menu_level)
 
 
+# Used to detect if player is being damaged
 func _on_hurt_box_area_entered(area):
 	take_damage(area.get_parent().get_parent().damage)
-	
+
+
+# Used to change scene when the player enters a door 
+func _on_detect_door_body_entered(body):
+	var parent_node = body.get_parent()
+	if body.get_name() == "DoorLeft":
+		if parent_node.connected_rooms[Vector2(-1, 0)] != null:
+			body.get_parent().change_room(parent_node.connected_rooms[Vector2(-1, 0)])
+			
+	elif body.get_name() == "DoorRight":
+		if parent_node.connected_rooms[Vector2(1, 0)] != null:
+			body.get_parent().change_room(parent_node.connected_rooms[Vector2(1, 0)])
+		
+	elif body.get_name() == "DoorUp":
+		if parent_node.connected_rooms[Vector2(0, 1)] != null:
+			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, 1)])
+			
+	elif body.get_name() == "DoorDown":
+		if parent_node.connected_rooms[Vector2(0, -1)] != null:
+			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, -1)])
+
+
+func _on_tree_entered():
+	if PlayerVariables.player_spawn_position != null:
+		position = PlayerVariables.player_spawn_position

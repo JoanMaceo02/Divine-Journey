@@ -1285,7 +1285,7 @@ material = SubResource("ShaderMaterial_gk553")
 position = Vector2(8, 16)
 sprite_frames = SubResource("SpriteFrames_ymumt")
 animation = &"left_idle"
-frame = 3
+frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_horizontal_enabled = true
@@ -1354,7 +1354,6 @@ position = Vector2(9.5, 0)
 shape = SubResource("RectangleShape2D_loixc")
 
 [connection signal="take_damage_signal" from="." to="PopupLocation" method="_on_player_take_damage_signal"]
-[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="DetectDoor" to="." method="_on_detect_door_body_entered"]
 

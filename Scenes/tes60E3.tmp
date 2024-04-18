@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://boqpg0o721jw6"]
+
+[ext_resource type="PackedScene" uid="uid://y7p4w15dofc2" path="res://Scenes/dungeon_generation.tscn" id="1_btik2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Dungeon" parent="." instance=ExtResource("1_btik2")]
+dungeon = []
+
+[node name="Generate" type="Button" parent="."]
+offset_left = -1272.0
+offset_top = -704.0
+offset_right = -1192.0
+offset_bottom = -673.0
+scale = Vector2(2.64, 3.08)
+text = "Generate"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(336, 192)
+zoom = Vector2(0.335, 0.335)
+
+[connection signal="pressed" from="Generate" to="Dungeon" method="_on_generate_pressed"]
