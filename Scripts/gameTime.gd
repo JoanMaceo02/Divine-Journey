@@ -14,9 +14,14 @@ var minutesSecondsDigit = 0
 @onready var minutesLabelSecondsDigit = $GameTime/MarginContainer/VBoxContainer/HBoxContainer/Minutes2
 
 
+func _ready():
+	seconds = PlayerVariables.player_timer_seconds
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	seconds += delta
+	PlayerVariables.player_timer_seconds = seconds
 	# Operations to calculate what digit corresponds to each digit text
 	secondsFirstDigit = str(int(seconds) % 10)
 	secondsSecondDigit = str((int(seconds) / 10) % 6)
