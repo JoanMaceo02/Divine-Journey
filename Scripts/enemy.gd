@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Stats
 @export var speed = 100
-@export var health = 300
+@export var health = 100
 @export var damage = 20
 
 var is_attacking = false
@@ -12,9 +12,11 @@ var direction = Vector2.ZERO
 @onready var hit_flash_anim_player = $HitFlashAnimationPlayer
 @onready var popupPosition = $PopupLocation
 @onready var healthbar = $Healthbar
+@onready var player = get_parent().get_node("Player")
 
 # Signals
 signal take_damage_signal(damageRecieved)
+signal enemy_die
 
 
 func _ready():
@@ -28,7 +30,7 @@ func _physics_process(delta):
 
 func move_enemy(delta):
 	# distance and direction of the enemy from the player
-	var distance = (Player.position - position)
+	var distance = (player.position - position)
 	direction = distance.normalized()
 	
 	# Valor provisional para que se detenga el enemigo, cambiar mas adelante
@@ -74,8 +76,10 @@ func take_damage(damageRecivied):
 
 
 func die():
+	var room = get_parent()
+	room.enemies_count -= 1
 	queue_free()
 
 
 func _on_hurt_box_area_entered(area):
-	take_damage(Player.damage)
+	take_damage(player.damage)

@@ -133,6 +133,8 @@ func create_new_room(dungeon_size):
 			isKeyRoomPlaced = true
 		new_room.room_type = room_types[type_index]
 	
+	new_room.enemies_count = 1
+	
 	return new_room
 
 

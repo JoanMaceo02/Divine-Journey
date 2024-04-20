@@ -16,6 +16,7 @@ var is_walking = false
 @onready var popupPosition = $PopupLocation
 @onready var attackTimer = $AttackTimer
 @onready var healthbar = $CanvasLayer/Healthbar
+@onready var fps_label = $CanvasLayer/FPS
 
 #Signals
 signal take_damage_signal(damageRecieved)
@@ -27,6 +28,7 @@ func _ready():
 
 func _physics_process(delta):
 	player_movement(delta)
+	fps_label.text = str(Engine.get_frames_per_second())
 
 
 func get_input():
@@ -110,18 +112,27 @@ func _on_detect_door_body_entered(body):
 	var parent_node = body.get_parent()
 	if body.get_name() == "DoorLeft":
 		if parent_node.connected_rooms[Vector2(-1, 0)] != null:
-			body.get_parent().change_room(parent_node.connected_rooms[Vector2(-1, 0)])
+			var new_room = parent_node.connected_rooms[Vector2(-1, 0)]
+			# We save the new information of the current room 
+			parent_node.update_room_information(new_room.connected_rooms[Vector2(1, 0)])
+			body.get_parent().change_room(new_room)
 			
 	elif body.get_name() == "DoorRight":
 		if parent_node.connected_rooms[Vector2(1, 0)] != null:
+			var new_room = parent_node.connected_rooms[Vector2(1, 0)]
+			parent_node.update_room_information(new_room.connected_rooms[Vector2(-1, 0)])
 			body.get_parent().change_room(parent_node.connected_rooms[Vector2(1, 0)])
 		
 	elif body.get_name() == "DoorUp":
 		if parent_node.connected_rooms[Vector2(0, 1)] != null:
+			var new_room = parent_node.connected_rooms[Vector2(0, 1)]
+			parent_node.update_room_information(new_room.connected_rooms[Vector2(0, -1)])
 			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, 1)])
 			
 	elif body.get_name() == "DoorDown":
 		if parent_node.connected_rooms[Vector2(0, -1)] != null:
+			var new_room = parent_node.connected_rooms[Vector2(0, -1)]
+			parent_node.update_room_information(new_room.connected_rooms[Vector2(0, 1)])
 			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, -1)])
 
 
