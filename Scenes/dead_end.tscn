@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://drxn8v540vln"]
+[gd_scene load_steps=7 format=3 uid="uid://csmoeuxg07xlv"]
 
-[ext_resource type="Script" path="res://Scripts/dead_end.gd" id="1_w1a68"]
+[ext_resource type="Script" path="res://Scripts/dead_end.gd" id="1_cdkgl"]
 [ext_resource type="Texture2D" uid="uid://otwvxmgtnmfg" path="res://Assets/Map/hyptosis_tile-art-batch-1.png" id="2_syj7q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bqrjk"]
@@ -18642,7 +18642,7 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_g2v2j")
 
 [node name="DeadEnd" type="Node2D"]
-script = ExtResource("1_w1a68")
+script = ExtResource("1_cdkgl")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_8rho0")

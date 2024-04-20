@@ -5,8 +5,8 @@ extends Node2D
 @onready var room = preload("res://Scripts/main_room.gd")
 @onready var room_connection = preload("res://Scenes/connection.tscn")
 
-var min_number_rooms = 10
-var max_number_rooms = 10
+var min_number_rooms = 4
+var max_number_rooms = 4
 
 # List of the rooms of the dungeon 
 @export var dungeon = []

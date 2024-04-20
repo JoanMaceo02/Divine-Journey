@@ -1,12 +1,7 @@
 extends RoomBase
 
 #@onready var player = get_parent().get_node("Player") # Player variable
-@onready var main_room_scene = preload("res://Scenes/main_room.tscn")
-@onready var normal_room_scene = preload("res://Scenes/normal_room.tscn")
-@onready var loot_room_scene = preload("res://Scenes/loot_room.tscn")
-@onready var key_room_scene = preload("res://Scenes/key_room.tscn")
-@onready var dead_end_scene = preload("res://Scenes/dead_end.tscn")
-@onready var boss_room_scene = preload("res://Scenes/boss_room.tscn")
+
 var new_script = null
 
 
@@ -22,16 +17,22 @@ func _process(delta):
 func change_room(new_room):
 	RoomInformationGlobal.script_current_room = new_room
 	if new_room.room_type == "Main Room":
+		var main_room_scene = load("res://Scenes/main_room.tscn")
 		get_tree().change_scene_to_packed(main_room_scene)
 	elif new_room.room_type == "Normal Room":
+		var normal_room_scene = load("res://Scenes/normal_room.tscn")
 		get_tree().change_scene_to_packed(normal_room_scene)
 	elif new_room.room_type == "Loot Room":
+		var loot_room_scene = load("res://Scenes/loot_room.tscn")
 		get_tree().change_scene_to_packed(loot_room_scene)
 	elif new_room.room_type == "Key Room":
+		var key_room_scene = load("res://Scenes/key_room.tscn")
 		get_tree().change_scene_to_packed(key_room_scene)
 	elif new_room.room_type == "Dead End":
+		var dead_end_scene = load("res://Scenes/dead_end.tscn")
 		get_tree().change_scene_to_packed(dead_end_scene)
 	elif new_room.room_type == "Boss Room":
+		var boss_room_scene = load("res://Scenes/boss_room.tscn")
 		get_tree().change_scene_to_packed(boss_room_scene)
 
 
