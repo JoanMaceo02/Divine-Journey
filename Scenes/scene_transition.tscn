@@ -59,10 +59,12 @@ _data = {
 
 [node name="scene_transition" type="CanvasLayer"]
 process_mode = 3
+layer = 2
 script = ExtResource("1_tp37y")
 
 [node name="dissolve_rect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
