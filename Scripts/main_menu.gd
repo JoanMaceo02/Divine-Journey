@@ -16,7 +16,7 @@ extends Node2D
 func _ready():
 	play_button.button_down.connect(on_start_pressed)
 	quit_button.button_down.connect(on_quit_pressed)
-	#Engine.max_fps = 40
+	Engine.max_fps = 60
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

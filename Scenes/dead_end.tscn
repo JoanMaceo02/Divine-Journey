@@ -18672,8 +18672,23 @@ tile_set = SubResource("TileSet_6ve10")
 format = 2
 layer_0/tile_data = PackedInt32Array(65497, 2883584, 35, 65498, 2883584, 35, 65499, 2883584, 35, 65500, 2883584, 35, 65501, 2883584, 35, 65502, 2883584, 35, 65503, 2883584, 35, 65504, 2883584, 35, 65505, 2883584, 35, 65506, 2883584, 35, 65507, 2883584, 35, 65508, 2883584, 35)
 
-[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
-position = Vector2(600, 320)
+[node name="PlayerSpawnPointLeft" type="Marker2D" parent="."]
+position = Vector2(112, 288)
+
+[node name="PlayerSpawnPointRight" type="Marker2D" parent="."]
+position = Vector2(1040, 288)
+
+[node name="PlayerSpawnPointUp" type="Marker2D" parent="."]
+position = Vector2(608, 72)
+
+[node name="PlayerSpawnPointDown" type="Marker2D" parent="."]
+position = Vector2(608, 560)
+
+[node name="EnemySpawnPoint" type="Marker2D" parent="."]
+position = Vector2(1000, 88)
+
+[node name="EnemySpawnStartTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 272.0
@@ -18683,3 +18698,4 @@ offset_bottom = 304.0
 text = "Prueba"
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="timeout" from="EnemySpawnStartTimer" to="." method="_on_enemy_spawn_start_timer_timeout"]

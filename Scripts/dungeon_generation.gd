@@ -5,8 +5,8 @@ extends Node2D
 @onready var room = preload("res://Scripts/main_room.gd")
 @onready var room_connection = preload("res://Scenes/connection.tscn")
 
-var min_number_rooms = 4
-var max_number_rooms = 4
+var min_number_rooms = 10
+var max_number_rooms = 10
 
 # List of the rooms of the dungeon 
 @export var dungeon = []
@@ -27,6 +27,7 @@ func generate_dungeon(dungeon_seed):
 	# Reference to the script attached to the scene
 	var main_room = room.new()
 	main_room.room_type = "Main Room"
+	main_room.enemies_count = 1
 	dungeon.append(main_room)
 	
 	for i in dungeon:
@@ -132,6 +133,8 @@ func create_new_room(dungeon_size):
 		if room_types[type_index] == "Key Room" and not isKeyRoomPlaced:
 			isKeyRoomPlaced = true
 		new_room.room_type = room_types[type_index]
+	
+	new_room.enemies_count = 1
 	
 	return new_room
 
