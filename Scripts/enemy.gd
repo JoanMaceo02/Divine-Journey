@@ -21,7 +21,7 @@ signal enemy_die
 
 func _ready():
 	# We init the healthbar at the start of the scene
-	healthbar.init_health(health)
+	healthbar.init_health(health, health)
 
 
 func _physics_process(delta):
@@ -35,7 +35,7 @@ func move_enemy(delta):
 	
 	# Valor provisional para que se detenga el enemigo, cambiar mas adelante
 	if not is_attacking:
-		if (distance.length() < 100):
+		if (distance.length() < 50):
 			velocity = Vector2.ZERO
 			is_attacking = true
 		else:
@@ -77,9 +77,14 @@ func take_damage(damageRecivied):
 
 func die():
 	var room = get_parent()
-	room.enemies_count -= 1
+	# Volver a poner esta variable si no se usa la escena test_combat_system
+	#room.enemies_count -= 1
 	queue_free()
 
 
 func _on_hurt_box_area_entered(area):
 	take_damage(player.damage)
+
+
+func _on_hit_box_body_entered(body):
+	pass # Replace with function body.

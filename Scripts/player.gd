@@ -23,8 +23,13 @@ signal take_damage_signal(damageRecieved)
 
 
 func _ready():
+	if PlayerVariables.player_health != null:
+		health = PlayerVariables.player_health
+	if PlayerVariables.player_max_health == null: 
+		PlayerVariables.player_max_health = health
+	
 	# We init the healthbar at the start of the scene
-	healthbar.init_health(health)
+	healthbar.init_health(health, PlayerVariables.player_max_health)
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -110,6 +115,7 @@ func _on_hurt_box_area_entered(area):
 # Used to change scene when the player enters a door 
 func _on_detect_door_body_entered(body):
 	var parent_node = body.get_parent()
+	PlayerVariables.player_health = health
 	if body.get_name() == "DoorLeft":
 		if parent_node.connected_rooms[Vector2(-1, 0)] != null:
 			var new_room = parent_node.connected_rooms[Vector2(-1, 0)]
