@@ -115,25 +115,29 @@ func _on_detect_door_body_entered(body):
 			var new_room = parent_node.connected_rooms[Vector2(-1, 0)]
 			# We save the new information of the current room 
 			parent_node.update_room_information(new_room.connected_rooms[Vector2(1, 0)])
-			body.get_parent().change_room(new_room)
+			var direction = 1
+			body.get_parent().change_room(new_room, direction)
 			
 	elif body.get_name() == "DoorRight":
 		if parent_node.connected_rooms[Vector2(1, 0)] != null:
 			var new_room = parent_node.connected_rooms[Vector2(1, 0)]
 			parent_node.update_room_information(new_room.connected_rooms[Vector2(-1, 0)])
-			body.get_parent().change_room(parent_node.connected_rooms[Vector2(1, 0)])
+			var direction = 2
+			body.get_parent().change_room(new_room, direction)
 		
 	elif body.get_name() == "DoorUp":
 		if parent_node.connected_rooms[Vector2(0, 1)] != null:
 			var new_room = parent_node.connected_rooms[Vector2(0, 1)]
 			parent_node.update_room_information(new_room.connected_rooms[Vector2(0, -1)])
-			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, 1)])
+			var direction = 3
+			body.get_parent().change_room(new_room, direction)
 			
 	elif body.get_name() == "DoorDown":
 		if parent_node.connected_rooms[Vector2(0, -1)] != null:
 			var new_room = parent_node.connected_rooms[Vector2(0, -1)]
 			parent_node.update_room_information(new_room.connected_rooms[Vector2(0, 1)])
-			body.get_parent().change_room(parent_node.connected_rooms[Vector2(0, -1)])
+			var direction = 4
+			body.get_parent().change_room(new_room, direction)
 
 
 func _on_tree_entered():
