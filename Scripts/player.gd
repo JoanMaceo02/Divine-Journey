@@ -3,7 +3,8 @@ extends CharacterBody2D
 
 # Stats
 @export var speed = 300
-@export var health = 100
+@export var max_health = 100
+@export var health = max_health
 @export var damage = 20
 
 var current_dir = "none"
@@ -17,6 +18,7 @@ var is_walking = false
 @onready var attackTimer = $AttackTimer
 @onready var healthbar = $CanvasLayer/Healthbar
 @onready var fps_label = $CanvasLayer/FPS
+@onready var camera = $Camera2D
 
 #Signals
 signal take_damage_signal(damageRecieved)
@@ -26,10 +28,19 @@ func _ready():
 	if PlayerVariables.player_health != null:
 		health = PlayerVariables.player_health
 	if PlayerVariables.player_max_health == null: 
-		PlayerVariables.player_max_health = health
+		PlayerVariables.player_max_health = max_health
+	else:
+		max_health = PlayerVariables.player_max_health 
 	
 	# We init the healthbar at the start of the scene
 	healthbar.init_health(health, PlayerVariables.player_max_health)
+	
+	var current_room = get_parent()
+	camera.limit_top = current_room.get_node("CameraLimitUp").position.y
+	camera.limit_bottom = current_room.get_node("CameraLimitDown").position.y
+	camera.limit_right = current_room.get_node("CameraLimitRight").position.x 
+	camera.limit_left = current_room.get_node("CameraLimitLeft").position.x 
+	camera.limit_smoothed = true
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -104,6 +115,7 @@ func take_damage(damageRecivied):
 func die():
 	# We go to main menu for the time being when we die
 	var menu_level = load("res://Scenes/main_menu.tscn") as PackedScene
+	PlayerVariables.player_health = max_health
 	get_tree().change_scene_to_packed(menu_level)
 
 

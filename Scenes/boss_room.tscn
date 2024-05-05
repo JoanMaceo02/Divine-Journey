@@ -18698,5 +18698,17 @@ offset_right = 608.0
 offset_bottom = 304.0
 text = "Prueba"
 
+[node name="CameraLimitUp" type="Marker2D" parent="."]
+position = Vector2(608, -16)
+
+[node name="CameraLimitDown" type="Marker2D" parent="."]
+position = Vector2(608, 672)
+
+[node name="CameraLimitLeft" type="Marker2D" parent="."]
+position = Vector2(-24, 288)
+
+[node name="CameraLimitRight" type="Marker2D" parent="."]
+position = Vector2(1176, 288)
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="timeout" from="EnemySpawnStartTimer" to="." method="_on_enemy_spawn_start_timer_timeout"]

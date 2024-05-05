@@ -917,7 +917,7 @@ shape = SubResource("RectangleShape2D_5r835")
 material = SubResource("ShaderMaterial_by42a")
 sprite_frames = SubResource("SpriteFrames_an8he")
 animation = &"left_walk"
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

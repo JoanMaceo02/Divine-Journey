@@ -78,7 +78,7 @@ func take_damage(damageRecivied):
 func die():
 	var room = get_parent()
 	# Volver a poner esta variable si no se usa la escena test_combat_system
-	#room.enemies_count -= 1
+	room.enemies_count -= 1
 	queue_free()
 
 

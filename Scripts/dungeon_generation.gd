@@ -2,7 +2,7 @@ extends Node2D
 
 
 @onready var room_scene = preload("res://Scenes/main_room.tscn")
-@onready var room = preload("res://Scripts/main_room.gd")
+@onready var room = preload("res://Scripts/room_base.gd")
 @onready var room_connection = preload("res://Scenes/connection.tscn")
 
 var min_number_rooms = 10

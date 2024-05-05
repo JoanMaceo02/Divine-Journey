@@ -74,6 +74,7 @@ basic_attack={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.0980392, 0.0980392, 0.0980392, 1)
 textures/stretch/mode="disabled"
 textures/size/window_height_override=0
 textures/size/window_width_override=0
